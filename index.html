@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#153b35" />
+  <meta name="description" content="Névtelen Kolléga – történetek szerkesztésének és jóváhagyásának demófelülete." />
+  <title>Névtelen Kolléga — szerkesztői felület</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Névtelen Kolléga kezdőlap">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span class="brand-name">névtelen<span>kolléga</span></span>
+      </a>
+      <div class="workspace-label">SZERKESZTŐI MŰHELY</div>
+      <nav class="main-nav" aria-label="Fő navigáció">
+        <button class="nav-link active" data-view="overview"><span class="nav-icon">⌂</span> Áttekintés</button>
+        <button class="nav-link" data-view="inbox"><span class="nav-icon">↙</span> Beérkezett <span class="nav-count" id="inbox-count">4</span></button>
+        <button class="nav-link" data-view="editor"><span class="nav-icon">✎</span> Szerkesztő</button>
+        <button class="nav-link" data-view="approval"><span class="nav-icon">✓</span> Jóváhagyás <span class="nav-count warm" id="approval-count">2</span></button>
+        <button class="nav-link" data-view="archive"><span class="nav-icon">▤</span> Archívum</button>
+        <button class="nav-link" data-view="settings"><span class="nav-icon">⚙</span> Beállítások</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="privacy-card">
+          <div class="privacy-icon">✳</div>
+          <strong>Biztonság az első</strong>
+          <p>Valós történetet csak védett, belépéshez kötött verzióban kezelj.</p>
+          <span class="status-pill demo-pill"><i></i> DEMÓ MÓD</span>
+        </div>
+        <div class="profile-row">
+          <div class="avatar">NK</div>
+          <div class="profile-copy"><strong>Szerkesztő</strong><span>Névtelen Kolléga</span></div>
+          <span class="dots">•••</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark"><span></span><span></span><span></span></span><strong>névtelen<span>kolléga</span></strong></div>
+        <div class="breadcrumb">Műhely <span>/</span> <strong id="breadcrumb-current">Áttekintés</strong></div>
+        <div class="topbar-right"><span class="demo-label"><i></i> Bemutatófelület</span><button class="help-button" id="help-button" aria-label="Súgó">?</button></div>
+      </header>
+
+      <div class="demo-banner">
+        <span class="banner-symbol">i</span>
+        <p><strong>Ez egy működő demó.</strong> A minták kitaláltak, a módosítások csak ebben a böngészőben mentődnek. Valós, beazonosítható vagy bizalmas munkahelyi történetet egyelőre ne írj ide.</p>
+        <button id="dismiss-banner" aria-label="Figyelmeztetés bezárása">×</button>
+      </div>
+
+      <section class="view active-view" id="view-overview">
+        <div class="page-heading">
+          <div><span class="eyebrow">2026. OKTÓBER 28. · SZERKESZTŐI MŰHELY</span><h1>Szia, szerkesztő! <span class="wave">✳</span></h1><p>Jó történetekből lesznek a fontos beszélgetések.</p></div>
+          <button class="button button-primary" id="new-story"><span>＋</span> Új piszkozat</button>
+        </div>
+        <div class="stat-grid">
+          <article class="stat-card"><div class="stat-top"><span>Új történetek</span><span class="stat-icon pale-yellow">↙</span></div><strong id="stat-inbox">4</strong><div class="stat-foot"><span class="tiny-dot yellow"></span> Átnézésre vár</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Piszkozatok</span><span class="stat-icon pale-lilac">✎</span></div><strong id="stat-drafts">3</strong><div class="stat-foot">Még szerkesztés alatt</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Jóváhagyásra vár</span><span class="stat-icon pale-green">✓</span></div><strong id="stat-approval">2</strong><div class="stat-foot"><span class="tiny-dot green"></span> A te döntésed következik</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Publikált posztok</span><span class="stat-icon pale-blue">↗</span></div><strong id="stat-published">5</strong><div class="stat-foot">Mintaadat, nem LinkedIn-adat</div></article>
+        </div>
+
+        <div class="section-heading"><div><span class="eyebrow">A KÖVETKEZŐ LÉPÉSEK</span><h2>Mi vár rád?</h2></div><button class="text-button" data-goto="inbox">Minden történet <span>→</span></button></div>
+        <div class="content-grid">
+          <section class="panel story-panel">
+            <div class="panel-header"><div><h3>Történetek a műhelyben</h3><p>Nyisd meg bármelyiket a részletekhez.</p></div><span class="mini-badge">MINTÁK</span></div>
+            <div class="story-list" id="overview-story-list"></div>
+            <button class="panel-footer-link" data-goto="inbox">Összes történet megnyitása <span>→</span></button>
+          </section>
+          <section class="panel flow-panel">
+            <div class="panel-header"><div><h3>Így születik egy poszt</h3><p>Mindig emberi jóváhagyással.</p></div><span class="flow-count">01—04</span></div>
+            <div class="workflow">
+              <div class="workflow-step"><div class="step-icon incoming">↙</div><div><strong>Beküldés érkezik</strong><p>Megnézzük, van-e benne személyes adat vagy kockázat.</p></div><span class="step-num">01</span></div>
+              <div class="workflow-step"><div class="step-icon editing">✎</div><div><strong>Szerkesztés és anonimizálás</strong><p>Világosabb, olvashatóbb szöveg – új tények nélkül.</p></div><span class="step-num">02</span></div>
+              <div class="workflow-step"><div class="step-icon review">◎</div><div><strong>Emberi ellenőrzés</strong><p>Te ellenőrzöd a hangnemet, a tényeket és a kockázatokat.</p></div><span class="step-num">03</span></div>
+              <div class="workflow-step"><div class="step-icon publish">↗</div><div><strong>Jóváhagyás és publikálás</strong><p>Élesben csak engedélyezett LinkedIn-kapcsolattal.</p></div><span class="step-num">04</span></div>
+            </div>
+            <div class="principle-note"><span>✳</span><p><strong>Az alapelvünk</strong><br>Emberekről beszélünk, nem bűnbakokat keresünk.</p></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-inbox">
+        <div class="page-heading compact-heading"><div><span class="eyebrow">TÖRTÉNETKEZELÉS</span><h1>Beérkezett történetek</h1><p>Nézd át, mielőtt bármit szerkesztenél vagy továbbengednél.</p></div><button class="button button-secondary" id="reset-demo">Demó visszaállítása</button></div>
+        <div class="toolbar"><label class="search-box"><span>⌕</span><input id="story-search" type="search" placeholder="Keresés a címben vagy szövegben…" /></label><select id="status-filter" aria-label="Szűrés állapot szerint"><option value="all">Minden állapot</option><option value="inbox">Beérkezett</option><option value="draft">Piszkozat</option><option value="approval">Jóváhagyásra vár</option><option value="approved">Jóváhagyva</option><option value="rejected">Elutasítva</option></select></div>
+        <div class="inbox-layout"><div class="panel all-stories-panel"><div class="list-heading"><span>TÖRTÉNET</span><span>STÁTUSZ</span></div><div id="all-story-list" class="all-story-list"></div><div id="empty-state" class="empty-state hidden"><span>✳</span><strong>Nincs találat</strong><p>Próbálj másik keresést vagy állapotszűrőt.</p></div></div><aside class="panel side-tip"><span class="tip-spark">✳</span><h3>Mielőtt továbbengednéd</h3><ul><li>Eltűnt minden név és azonosító részlet?</li><li>Megmaradt a beküldő eredeti mondanivalója?</li><li>Nem állítunk ellenőrizetlen dolgot tényként?</li><li>Van engedély a felhasználásra?</li></ul><p class="tip-bottom">Ha bármiben bizonytalan vagy, állítsd meg a folyamatot.</p></aside></div>
+      </section>
+
+      <section class="view" id="view-editor">
+        <div class="page-heading compact-heading"><div><span class="eyebrow">SZERKESZTŐI MUNKATÉR</span><h1>Szövegszerkesztő</h1><p>Szerkeszd a mintatörténeteket. Az AI-funkció helyét most egy demó javaslat gomb jelöli.</p></div></div>
+        <div class="editor-layout"><div class="panel editor-panel"><div class="panel-header"><div><h3>Poszt tartalma</h3><p id="editor-story-ref">Válassz történetet a listából.</p></div><span class="mini-badge">HELYI PISZKOZAT</span></div><div id="editor-empty" class="empty-state"><span>✎</span><strong>Válassz egy történetet</strong><p>A „Beérkezett történetek” nézetben válassz ki egy elemet a szerkesztéshez.</p><button class="button button-secondary" data-goto="inbox">Történetek megnyitása</button></div><div id="editor-form" class="hidden"><label class="field-label" for="story-title">Poszt címe</label><input id="story-title" class="field-control" maxlength="120" /><div class="field-meta"><span>Rövid, érthető cím</span><span id="title-length">0 / 120</span></div><label class="field-label" for="story-body">LinkedIn-poszt szövege</label><textarea id="story-body" class="field-control story-textarea" rows="12" maxlength="3000"></textarea><div class="field-meta"><span>Ne adj hozzá nem ellenőrzött részleteket.</span><span id="body-length">0 / 3000</span></div><label class="field-label" for="editor-note">Belső szerkesztői jegyzet</label><textarea id="editor-note" class="field-control" rows="3" maxlength="600" placeholder="Például: még ellenőrizni kell a beküldési engedélyt…"></textarea><div class="editor-actions"><button class="button button-secondary" id="save-draft">Piszkozat mentése</button><button class="button button-light" id="suggest-edit">✳ Szerkesztési ötlet</button><button class="button button-primary" id="send-approval">Jóváhagyásra küldöm →</button></div><p class="editor-footnote">A szerkesztési ötlet előre megírt demó; jelenleg nincs AI-szolgáltatás csatlakoztatva.</p></div></div><aside class="panel checks-panel"><div class="panel-header"><div><h3>Publikálás előtti ellenőrzés</h3><p>Ne legyen automatikus továbblépés.</p></div></div><div class="check-item"><span class="check-symbol">01</span><div><strong>Anonimizálás</strong><p>Ne maradjon benne név, pontos munkakör vagy könnyen felismerhető részlet.</p></div></div><div class="check-item"><span class="check-symbol">02</span><div><strong>Tények és hangnem</strong><p>Maradjon tiszteletteljes, ne tartalmazzon bizonyítatlan vádat.</p></div></div><div class="check-item"><span class="check-symbol">03</span><div><strong>Felhasználási engedély</strong><p>Legyen rendezve a beküldő hozzájárulása és a közzététel jogalapja.</p></div></div><div class="risk-note"><span>!</span><p><strong>Az anonimizálás nem csak a nevek törlése.</strong> A körülmények együtt is azonosíthatnak egy embert vagy munkahelyet.</p></div></aside></div>
+      </section>
+
+      <section class="view" id="view-approval">
+        <div class="page-heading compact-heading"><div><span class="eyebrow">EMBERI DÖNTÉSI PONT</span><h1>Jóváhagyás</h1><p>Csak az általad jóváhagyott tartalom kerülhet tovább. Ez a demó még nem publikál LinkedInre.</p></div></div>
+        <div class="approval-banner"><span>✓</span><div><strong>Te mondod ki az utolsó szót.</strong><p>A jóváhagyás itt csak a belső demó státuszát változtatja meg. Nem jelent nyilvános közzétételt.</p></div></div>
+        <div class="panel approval-panel"><div class="panel-header"><div><h3>Döntésre váró piszkozatok</h3><p>Nézd át, nyisd meg, és csak utána dönts.</p></div></div><div id="approval-list" class="approval-list"></div></div>
+      </section>
+
+      <section class="view" id="view-archive">
+        <div class="page-heading compact-heading"><div><span class="eyebrow">VISSZAKERESHETŐSÉG</span><h1>Archívum</h1><p>Jóváhagyott és elutasított demótartalmak.</p></div></div>
+        <div class="panel archive-panel"><div id="archive-list" class="all-story-list"></div></div>
+      </section>
+
+      <section class="view" id="view-settings">
+        <div class="page-heading compact-heading"><div><span class="eyebrow">MŰHELYBEÁLLÍTÁSOK</span><h1>Beállítások</h1><p>Az élesítés előtt ezeket a részeket külön kell bekötni és tesztelni.</p></div></div>
+        <div class="settings-grid"><article class="panel setting-card"><div class="setting-icon">⌑</div><h3>Belépés és hozzáférés</h3><p>Adminfelülethez egyéni belépés, jogosultságok és biztonságos munkamenet szükséges.</p><span class="setting-status pending">Még nincs bekötve</span></article><article class="panel setting-card"><div class="setting-icon">▤</div><h3>Adatbázis</h3><p>A történetek tartós, hozzáférés-szabályozott adatbázisba kerülnek majd. A CalicoChef adatbázisa nem használható ehhez.</p><span class="setting-status pending">Külön projekt kell</span></article><article class="panel setting-card"><div class="setting-icon">✳</div><h3>AI-szerkesztő</h3><p>Anonimizálás, cím- és posztjavaslat, kockázati jelzés, tények kitalálása nélkül.</p><span class="setting-status demo">Demó gomb aktív</span></article><article class="panel setting-card"><div class="setting-icon">↗</div><h3>LinkedIn-kapcsolat</h3><p>Céges oldalra publikáláshoz fejlesztői hozzáférés, OAuth és megfelelő szervezeti jogosultság kell.</p><span class="setting-status pending">Nincs csatlakoztatva</span></article></div>
+        <div class="privacy-footer"><strong>Adatvédelmi alapbeállítás</strong><p>Csak a szükséges adatot kérjük be. A beküldő azonosító adatait elkülönítjük a publikálható történettől, a közzététel előtt pedig emberi ellenőrzés történik.</p></div>
+      </section>
+
+      <footer class="app-footer"><span>névtelen kolléga <span class="footer-dot">·</span> belső szerkesztői demó</span><span>Emberségesen. Névtelenül. Felelősen.</span></footer>
+    </main>
+  </div>
+  <div class="toast" role="status" aria-live="polite" id="toast"></div>
+  <dialog id="help-dialog" class="help-dialog"><div class="dialog-top"><span class="brand-mark small-mark"><span></span><span></span><span></span></span><button id="close-help" class="dialog-close" aria-label="Bezárás">×</button></div><h2>Üdv a szerkesztői műhelyben!</h2><p>Ez a felület a munkafolyamat kipróbálására készült. A történetek fiktívek, a mentés helyi, a jóváhagyás pedig csak demó státuszt állít be.</p><p>Az éles verzióhoz külön belépés, adatbázis, AI-szolgáltatás és – a hozzáférés jóváhagyása után – LinkedIn-integráció szükséges.</p><button class="button button-primary" id="close-help-2">Értem</button></dialog>
+</body>
+</html>
